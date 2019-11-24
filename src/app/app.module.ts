@@ -20,7 +20,7 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-
+import { AuthModule } from './auth/auth.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -39,6 +39,7 @@ import {
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     CoreModule.forRoot(),
+    AuthModule,
   ],
   bootstrap: [AppComponent],
 })
