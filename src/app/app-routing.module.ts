@@ -5,37 +5,32 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { LoginComponent } from './auth/containers/login/login.component';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { PagesGuard } from './auth/guards/pages.guard';
 
 const routes: Routes = [
-  {
-    path: "",
-    redirectTo: "dashboard",
-    pathMatch: "full"
-  },
+
   {
     path: "",
     component: AdminLayoutComponent,
+    canActivate: [PagesGuard],
+    canLoad: [PagesGuard],
     children: [
       {
         path: "",
         loadChildren:
           "./layouts/admin-layout/admin-layout.module#AdminLayoutModule"
-      }
+      },
+
     ]
   }, {
-    path: '',
-    component: AuthLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './layouts/auth-layout/auth-layout.module#AuthLayoutModule'
-      }
-    ]
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [AuthGuard],
   },
-  {
-    path: "**",
-    redirectTo: "dashboard"
-  }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({
