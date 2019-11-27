@@ -9,9 +9,10 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
 import { PagesGuard } from './guards/pages.guard';
 import { TokenInterceptor } from './token.interceptor';
+import { SignupComponent } from './containers/signup/signup.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, SignupComponent],
   providers: [
     AuthGuard,
     AuthService,

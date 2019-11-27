@@ -11,6 +11,8 @@ import {
 import { AuthGuard } from './auth/guards/auth.guard';
 import { PagesGuard } from './auth/guards/pages.guard';
 import { LoginComponent } from './auth/containers/login/login.component';
+import { SignupComponent } from './auth/containers/signup/signup.component';
+
 
 const routes: Routes = [
   {
@@ -36,7 +38,7 @@ const routes: Routes = [
       },
       {
         path: 'register',
-        component: NbRegisterComponent,
+        component: SignupComponent,
       },
       {
         path: 'logout',
