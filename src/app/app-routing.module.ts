@@ -1,70 +1,51 @@
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
-import {
-  NbAuthComponent,
-  NbLoginComponent,
-  NbLogoutComponent,
-  NbRegisterComponent,
-  NbRequestPasswordComponent,
-  NbResetPasswordComponent,
-} from '@nebular/auth';
-import { AuthGuard } from './auth/guards/auth.guard';
-import { PagesGuard } from './auth/guards/pages.guard';
-import { LoginComponent } from './auth/containers/login/login.component';
-import { SignupComponent } from './auth/containers/signup/signup.component';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { BrowserModule } from "@angular/platform-browser";
+import { Routes, RouterModule } from "@angular/router";
 
+import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 const routes: Routes = [
   {
-    path: 'pages',
-    loadChildren: () => import('./pages/pages.module')
-      .then(m => m.PagesModule),
-      canActivate: [PagesGuard],
-      canLoad: [PagesGuard]
+    path: "",
+    redirectTo: "dashboard",
+    pathMatch: "full"
   },
   {
-    path: 'auth',
-    component: NbAuthComponent,
+    path: "",
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: "",
+        loadChildren:
+          "./layouts/admin-layout/admin-layout.module#AdminLayoutModule"
+      }
+    ]
+  }, {
+    path: '',
+    component: AuthLayoutComponent,
     children: [
       {
         path: '',
-        component: LoginComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'login',
-        component: LoginComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'register',
-        component: SignupComponent,
-      },
-      {
-        path: 'logout',
-        component: NbLogoutComponent,
-      },
-      {
-        path: 'request-password',
-        component: NbRequestPasswordComponent,
-      },
-      {
-        path: 'reset-password',
-        component: NbResetPasswordComponent,
-      },
-    ],
+        loadChildren: './layouts/auth-layout/auth-layout.module#AuthLayoutModule'
+      }
+    ]
   },
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  { path: '**', redirectTo: 'auth' },
+  {
+    path: "**",
+    redirectTo: "dashboard"
+  }
 ];
 
-const config: ExtraOptions = {
-  useHash: false,
-};
-
 @NgModule({
-  imports: [RouterModule.forRoot(routes, config)],
-  exports: [RouterModule],
+  imports: [
+    CommonModule,
+    BrowserModule,
+    RouterModule.forRoot(routes, {
+      useHash: true
+    })
+  ],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
