@@ -15,7 +15,7 @@ export class PagesGuard implements CanActivate, CanLoad {
 
   canLoad() {
     if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['login']);
+      this.router.navigate(['/login']);
     }
     return this.authService.isLoggedIn();
   }

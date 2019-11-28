@@ -1,9 +1,9 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { BrowserModule } from "@angular/platform-browser";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { CommonModule, APP_BASE_HREF } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { Routes, RouterModule } from '@angular/router';
 
-import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { LoginComponent } from './auth/containers/login/login.component';
 import { AuthGuard } from './auth/guards/auth.guard';
@@ -12,18 +12,16 @@ import { PagesGuard } from './auth/guards/pages.guard';
 const routes: Routes = [
 
   {
-    path: "",
+    path: '',
     component: AdminLayoutComponent,
     canActivate: [PagesGuard],
     canLoad: [PagesGuard],
     children: [
       {
-        path: "",
+        path:"",
         loadChildren:
           "./layouts/admin-layout/admin-layout.module#AdminLayoutModule"
-      },
-
-    ]
+      }]
   }, {
     path: 'login',
     component: LoginComponent,
@@ -37,10 +35,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes, {
-      useHash: true
-    })
+    RouterModule.forRoot(routes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [{provide: APP_BASE_HREF, useValue: '/'}]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
