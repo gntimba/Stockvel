@@ -8,6 +8,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { LoginComponent } from './auth/containers/login/login.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { PagesGuard } from './auth/guards/pages.guard';
+import { SignupComponent } from './auth/containers/signup/signup.component';
 
 const routes: Routes = [
 
@@ -18,7 +19,7 @@ const routes: Routes = [
     canLoad: [PagesGuard],
     children: [
       {
-        path:"",
+        path: "",
         loadChildren:
           "./layouts/admin-layout/admin-layout.module#AdminLayoutModule"
       }]
@@ -26,6 +27,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'login' },
@@ -38,6 +43,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
-  providers: [{provide: APP_BASE_HREF, useValue: '/'}]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
 })
 export class AppRoutingModule { }
