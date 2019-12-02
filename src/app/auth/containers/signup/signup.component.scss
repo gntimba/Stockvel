@@ -3,6 +3,10 @@
 [nz-form] {
   max-width: 600px;
 }
+.prefix{
+  color: black;
+  font-size: 12px;
+}
 
 .phone-select {
   width: 70px;
@@ -10,4 +14,11 @@
 
 .register-are {
   margin-bottom: 8px;
+}
+
+::ng-deep .ant-form-item-label>label{
+  color: aliceblue;
+}
+.form{
+  margin: 5%;
 }

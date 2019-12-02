@@ -30,6 +30,9 @@ export class AuthService {
           return of(false);
         }));
   }
+  signup(data){
+    return this.http.post(`${config.apiUrl}/signup`,data)
+  }
 
   logout() {
     return this.http.post<any>(`${config.apiUrl}/logout`, {

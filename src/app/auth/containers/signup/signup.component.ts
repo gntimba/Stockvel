@@ -1,5 +1,8 @@
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-signup',
@@ -8,12 +11,26 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 })
 export class SignupComponent implements OnInit {
 
+
+  constructor(private fb: FormBuilder, private auth: AuthService, private toast: ToastrService, private router: Router) { }
+
   validateForm: FormGroup;
+  startValue = new Date();
+  feedback: any;
 
   submitForm(): void {
+    // tslint:disable-next-line: forin
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
+    }
+    if (!this.validateForm.invalid) {
+      this.auth.signup(this.validateForm.value).subscribe(datas => {
+        console.log(datas)
+        this.feedback = datas;
+        this.toast.success(this.feedback.message)
+        this.router.navigate(['/login']);
+      })
     }
   }
 
@@ -35,20 +52,22 @@ export class SignupComponent implements OnInit {
     e.preventDefault();
   }
 
-  constructor(private fb: FormBuilder) {}
-
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       email: [null, [Validators.email, Validators.required]],
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      nickname: [null, [Validators.required]],
-      phoneNumberPrefix: ['+86'],
+      DOB: [null, [Validators.required]],
+      phoneNumberPrefix: ['+27'],
       phoneNumber: [null, [Validators.required]],
-      website: [null, [Validators.required]],
-      captcha: [null, [Validators.required]],
-      agree: [false]
+      lastname: [null, [Validators.required]],
+      firstname: [null, [Validators.required]],
     });
   }
-
+  disabledEndDate = (endValue: Date): boolean => {
+    if (!endValue || !this.startValue) {
+      return false;
+    }
+    return endValue.getTime() > this.startValue.getTime();
+  };
 }

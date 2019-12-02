@@ -1,19 +1,29 @@
-
+@import "../../../../../node_modules/ng-zorro-antd/style/index.min.css"; /* Import basic styles */
+@import "../../../../../node_modules/ng-zorro-antd/form/style/index.min.css"; /* Import basic styles */
 :host {
   text-align: center;
   display: block;
-  margin-top: 30%;
+  margin-top: 10%;
 }
 
-form {
-  max-width: 300px;
-  margin: auto;
-}
 
-mat-form-field {
-  width: 100%;
-}
 
 .actions {
   text-align: center;
 }
+.login-form {
+  max-width: 300px;
+  margin: auto;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}
+ ::ng-deep body{
+  background-color: aliceblue !important;
+}
+

@@ -35,8 +35,11 @@ export class TokenInterceptor implements HttpInterceptor {
         this.toastrService.warning('You are not authorised', error.message);
 
       } else if (error instanceof HttpErrorResponse && error.status === 404) {
-        this.toastrService.warning('error', error.error.messag);
-      } else {
+        this.toastrService.warning('error', error.error.message);
+      } else if (error instanceof HttpErrorResponse && error.status === 409) {
+        this.toastrService.error('error', error.error.message);
+      }
+       else {
         return throwError(error);
       }
     }));
