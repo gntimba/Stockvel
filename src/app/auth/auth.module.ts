@@ -10,6 +10,11 @@ import { AuthService } from './services/auth.service';
 import { PagesGuard } from './guards/pages.guard';
 import { TokenInterceptor } from './token.interceptor';
 import { SignupComponent } from './containers/signup/signup.component';
+import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+/** config angular i18n **/
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+registerLocaleData(en);
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
@@ -30,7 +35,8 @@ import { SignupComponent } from './containers/signup/signup.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgZorroAntdModule
   ]
 })
 export class AuthModule { }
