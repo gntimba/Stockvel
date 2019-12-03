@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
@@ -16,7 +17,7 @@ export class AuthService {
 
   private loggedUser: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private router : Router) {}
 
   login(user: { email: string, password: string }): Observable<boolean> {
     return this.http.post<any>(`${config.apiUrl}/auth`, user)
@@ -35,13 +36,11 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post<any>(`${config.apiUrl}/logout`, {
-      'refreshToken': this.getRefreshToken()
-    }).pipe(
+    return this.http.get(`${config.apiUrl}/logout`).pipe(
       tap(() => this.doLogoutUser()),
       mapTo(true),
       catchError(error => {
-        alert(error.error);
+        console.log(error);
         return of(false);
       }));
   }
@@ -89,6 +88,7 @@ export class AuthService {
   private removeTokens() {
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.USER_ID);
+    this.router.navigate(['/login']);
   //  localStorage.removeItem(this.REFRESH_TOKEN);
   }
 }

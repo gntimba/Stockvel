@@ -31,7 +31,8 @@ registerLocaleData(en);
     AppRoutingModule,
     ToastrModule.forRoot(),
     AuthModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

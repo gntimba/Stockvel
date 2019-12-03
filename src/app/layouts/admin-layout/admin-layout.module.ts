@@ -9,6 +9,9 @@ import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
 import { IconsComponent } from "../../pages/icons/icons.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { UserComponent } from './../../pages/user/user.component';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { MatButtonModule, MatFormFieldModule, MatInputModule,MatDatepickerModule,MatNativeDateModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -17,10 +20,17 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     FormsModule,
     HttpClientModule,
     NgbModule,
+    NgZorroAntdModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   declarations: [
     DashboardComponent,
     IconsComponent,
+    UserComponent
     // RtlComponent
   ]
 })
