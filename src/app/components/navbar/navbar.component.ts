@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private toggleButton: any;
   private sidebarVisible: boolean;
   user: any;
+  load=true;
 
   public isCollapsed = true;
 
@@ -48,6 +49,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.ser.getUser().subscribe(profile => {
       this.user = profile;
+      this.load=false
     })
     window.addEventListener('resize', this.updateColor);
     this.listTitles = ROUTES.filter(listTitle => listTitle);

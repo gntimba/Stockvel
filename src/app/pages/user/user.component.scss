@@ -1,3 +1,18 @@
-.mat-icon-button{
+
+::ng-deep .mat-icon-button {
   color: rgba(255, 255, 255, 0.6);
+}
+::ng-deep .mat-input-element {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  color: rgba(255, 255, 255, 0.6) !important;
+
+}
+::ng-deep .mat-form-field-underline {
+  background-color:  rgba(255, 255, 255, 0.6) !important;
+}
+
+::ng-deep .mat-form-field-ripple {
+  background-color: #e14eca !important;;
 }

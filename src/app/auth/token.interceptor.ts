@@ -36,6 +36,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
       } else if (error instanceof HttpErrorResponse && error.status === 404) {
         this.toastrService.warning('error', error.error.message);
+        console.log(error)
       } else if (error instanceof HttpErrorResponse && error.status === 409) {
         this.toastrService.error('error', error.error.message);
       }

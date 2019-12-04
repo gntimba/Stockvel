@@ -29,7 +29,7 @@ registerLocaleData(en);
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({enableHtml:true,positionClass:'toast-top-right'}),
     AuthModule,
     NgZorroAntdModule,
 

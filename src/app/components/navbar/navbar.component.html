@@ -84,14 +84,15 @@
             ngbDropdownToggle
           >
             <div class=" photo">
-              <img alt="Profile Photo" src="{{user?.picture}}" />
+              <img *ngIf="load" alt="Profile Photo" src="../../../assets/spin.gif" />
+              <img *ngIf="!load" alt="Profile Photo" src="{{user?.picture}}" />
             </div>
             <b class=" caret d-none d-lg-block d-xl-block"> </b>
             <p class=" d-lg-none">Log out</p>
           </a>
           <ul class=" dropdown-navbar" ngbDropdownMenu>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
+              <a class=" nav-item" [routerLink]="['/profile']" ngbDropdownItem>
                 Profile
               </a>
             </li>

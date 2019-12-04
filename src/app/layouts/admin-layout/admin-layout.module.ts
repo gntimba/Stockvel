@@ -3,15 +3,15 @@ import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { AdminLayoutRoutes } from "./admin-layout.routing";
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
 import { IconsComponent } from "../../pages/icons/icons.component";
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { UserComponent } from './../../pages/user/user.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { MatButtonModule, MatFormFieldModule, MatInputModule,MatDatepickerModule,MatNativeDateModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -25,7 +25,9 @@ import { MatButtonModule, MatFormFieldModule, MatInputModule,MatDatepickerModule
     MatFormFieldModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    NgxSkeletonLoaderModule
   ],
   declarations: [
     DashboardComponent,
@@ -34,4 +36,4 @@ import { MatButtonModule, MatFormFieldModule, MatInputModule,MatDatepickerModule
     // RtlComponent
   ]
 })
-export class AdminLayoutModule {}
+export class AdminLayoutModule { }

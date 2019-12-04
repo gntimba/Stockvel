@@ -26,7 +26,6 @@ export class SignupComponent implements OnInit {
     }
     if (!this.validateForm.invalid) {
       this.auth.signup(this.validateForm.value).subscribe(datas => {
-        console.log(datas)
         this.feedback = datas;
         this.toast.success(this.feedback.message)
         this.router.navigate(['/login']);

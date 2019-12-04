@@ -8,7 +8,11 @@ export class OnlineService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(){
+  getUser() {
     return this.http.get(`${config.apiUrl}/profile`);
+  }
+
+  update(data) {
+    return this.http.post(`${config.apiUrl}/update`, data);
   }
 }

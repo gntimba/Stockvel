@@ -3,9 +3,14 @@
   <div class=" row">
     <div class=" col-md-8">
       <div class=" card">
+
         <div class=" card-header"><h5 class=" title">Edit Profile</h5></div>
-        <div class=" card-body">
-          <form>
+        <ngx-skeleton-loader *ngIf="load" count="7"
+        [theme]="{ 'border-radius': '5px', height: '30px', 'background-color': '#525f7f', border: '1px solid #2b3553' }">
+      </ngx-skeleton-loader>
+
+        <div  *ngIf="!load" class=" card-body">
+          <form [formGroup]="profileForm">
             <div class=" row">
 
               <div class=" col-md-4 pl-md-1">
@@ -21,34 +26,43 @@
               </div>
               <div class=" col-md-4 pl-md-1">
                 <div class=" form-group">
-                  <mat-form-field>
-                    <input matInput [matDatepicker]="picker3" placeholder="Date of Borth" [value]="this.dob">
+                  <mat-form-field  floatLabel="never">
+                    <input matInput [max]="maxDate" [matDatepicker]="picker3" placeholder="Date of Borth" formControlName="dob">
                     <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
                     <mat-datepicker #picker3></mat-datepicker>
                   </mat-form-field>
                 </div>
               </div>
+              <div class=" col-md-4 pl-md-1">
+                  <div class=" form-group">
+                    <label for="exampleInputEmail1"> Phone number </label>
+                    <input formControlName="phoneNumber"
+                      class=" form-control"
+                      placeholder="Phone Number"
+                      type="text"
+                    />
+                  </div>
+                </div>
             </div>
             <div class=" row">
               <div class=" col-md-6 pr-md-1">
                 <div class=" form-group">
                   <label> First Name </label>
-                  <input
+                  <input formControlName="firstName"
                     class=" form-control"
                     placeholder="First Name"
                     type="text"
-                    [value]="user?.firstName"
                   />
                 </div>
               </div>
               <div class=" col-md-6 pl-md-1">
                 <div class=" form-group">
                   <label> Last Name </label>
-                  <input
+                  <input formControlName="lastName"
                     class=" form-control"
                     placeholder="Last Name"
                     type="text"
-                    [value]="user?.lastName"
+
                   />
                 </div>
               </div>
@@ -57,11 +71,11 @@
               <div class=" col-md-12">
                 <div class=" form-group">
                   <label> Address </label>
-                  <input
+                  <input formControlName="address"
                     class=" form-control"
                     placeholder="Home Address"
                     type="text"
-                    [value]="user?.address"
+
                   />
                 </div>
               </div>
@@ -70,33 +84,33 @@
               <div class=" col-md-4 pr-md-1">
                 <div class=" form-group">
                   <label> City </label>
-                  <input
+                  <input formControlName="city"
                     class=" form-control"
                     placeholder="City"
                     type="text"
-                    [value]="user?.city"
+
                   />
                 </div>
               </div>
               <div class=" col-md-4 px-md-1">
                 <div class=" form-group">
                   <label> Suburb </label>
-                  <input
+                  <input formControlName="suburb"
                     class=" form-control"
-                    placeholder="Country"
+                    placeholder="Suburb"
                     type="text"
-                    [value]="user?.suburb"
+
                   />
                 </div>
               </div>
               <div class=" col-md-4 pl-md-1">
                 <div class=" form-group">
                   <label> Postal Code </label>
-                  <input
+                  <input formControlName="postal"
                     class=" form-control"
                     placeholder="Postal Code"
                     type="number"
-                    [value]="user?.postal"
+
                   />
                 </div>
               </div>
@@ -104,9 +118,10 @@
           </form>
         </div>
         <div class=" card-footer">
-          <button class=" btn btn-fill btn-danger" (click)="update()" type="submit">Save</button>
+          <button [disabled]="profileForm.invalid || !profileForm.dirty"  *ngIf="!load" class=" btn btn-fill btn-danger" (click)="update()" type="submit">Save</button>
         </div>
       </div>
+
     </div>
     <div class=" col-md-4">
       <div class=" card card-user">
@@ -118,8 +133,11 @@
             <div class=" block block-three"></div>
             <div class=" block block-four"></div>
             <a href="javascript:void(0)">
-              <img alt="..." class=" avatar" src="{{user?.picture}}" />
-
+                <img  *ngIf="load" alt="..." class=" avatar" src="../../../assets/spin.gif" />
+              <img  *ngIf="!load" alt="..." class=" avatar" src="{{user?.picture}}" />
+              <ngx-skeleton-loader *ngIf="load" count="1"
+              [theme]="{ 'border-radius': '5px', height: '30px', 'background-color': '#525f7f', border: '1px solid #2b3553' }">
+            </ngx-skeleton-loader>
               <h5 class=" title">{{user?.firstName}} {{user?.lastName}}</h5>
             </a>
             <p class=" description"></p>
